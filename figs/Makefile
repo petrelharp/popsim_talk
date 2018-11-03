@@ -1,15 +1,19 @@
 .PHONY : copyfigs all
 
-all : koopas.png koopas_dispersal.png koopas_mates.png koopas_density.png koopas_death.png  10kouts_coalescence_by_generation.png sumstat_by_dispersal_spat_v_rm.png sfs_spatial_continuous_bins.png
+# koopas_interactions.png is not working because of transparency
+all : koopas.png koopas_dispersal.png koopas_mates.png koopas_density.png koopas_death.png 10kouts_coalescence_by_generation.png sumstat_by_dispersal_spat_v_rm.png sfs_spatial_v_rm_curves.png sfs_spatial_v_rm_diffs.png
 
 koopas.pdf : koopa_dynamics.ink.svg
 	./export-layers-svg.sh $< base > $@
 
-koopas_dispersal.pdf : koopa_dynamics.ink.svg
-	./export-layers-svg.sh $< base kids dispersal > $@
+koopas_interactions.pdf : koopa_dynamics.ink.svg
+	./export-layers-svg.sh $< base interactions > $@
 
 koopas_mates.pdf : koopa_dynamics.ink.svg
-	./export-layers-svg.sh $< base kids mate_choice > $@
+	./export-layers-svg.sh $< base mate_choice > $@
+
+koopas_dispersal.pdf : koopa_dynamics.ink.svg
+	./export-layers-svg.sh $< base kids dispersal > $@
 
 koopas_density.pdf : koopa_dynamics.ink.svg
 	./export-layers-svg.sh $< base kids density > $@

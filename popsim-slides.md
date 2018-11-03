@@ -154,13 +154,18 @@ That means the Wright-Fisher model is *right out*.
 </center>
 
 
-##  
+## Interactions
+
 
 ::: {.columns}
 ::::::: {.column width="50%"}
 
-1. **Dispersal:** 
-    offspring live near their parents.
+Based on *interaction kernels*, e.g.
+$$
+    \rho(r) = \frac{1}{2 \pi \sigma^2} e^{- r^2 / 2 \sigma^2}
+$$
+
+applied to the distance to the other individual.
 
 :::
 ::::::: {.column width="50%"}
@@ -171,12 +176,55 @@ That means the Wright-Fisher model is *right out*.
 :::::::
 
 
+## Interactions
+
+
+::: {.columns}
+::::::: {.column width="50%"}
+
+Based on *interaction kernels*, e.g.
+$$
+    \rho(r) = \frac{1}{2 \pi \sigma^2} e^{- r^2 / 2 \sigma^2}
+$$
+
+applied to the distance to the other individual.
+
+
+:::
+::::::: {.column width="50%"}
+
+![](figs/koopa_interactions.png){width=100%}
+
+:::
+:::::::
+
+
 ##  
 
 ::: {.columns}
 ::::::: {.column width="50%"}
 
-1. **Dispersal:** 
+1. **Mate choice:** 
+
+    individual $i$ chooses partner $j$ at distance $d_{ij}$ 
+    with probability proportional to $\rho(d_{ij})$.
+
+:::
+::::::: {.column width="50%"}
+
+![](figs/koopas_mates.png){width=100%}
+
+:::
+:::::::
+
+
+##  
+
+::: {.columns}
+::::::: {.column width="50%"}
+
+2. **Dispersal:** 
+
     offspring live near their parents.
 
 :::
@@ -193,37 +241,16 @@ That means the Wright-Fisher model is *right out*.
 ::: {.columns}
 ::::::: {.column width="50%"}
 
-Given a *interaction kernel*, e.g.
-$$
-    \rho(r) = \frac{1}{2 \pi \sigma^2} e^{- r^2 / 2 \sigma^2} :
-$$
-
-2. **Mate choice:** 
-    partner $j$ at distance $r_j$ chosen proportional to $\rho(r_j)$.
-
-:::
-::::::: {.column width="50%"}
-
-![](figs/koopas_mates.png){width=100%}
-
-:::
-:::::::
-
-
-##  
-
-::: {.columns}
-::::::: {.column width="50%"}
-
-Given a *interaction kernel*, e.g.
-$$
-    \rho(r) = \frac{1}{2 \pi \sigma^2} e^{- r^2 / 2 \sigma^2} :
-$$
-
 3. **Population regulation:**
+
     with local density
-    $$ D = \sum_j \rho(r_j) , $$
-    *survival*, *fecundity*, and/or *establishment* decrease with $D$.
+    $$ D = \sum_j \rho(d_{ij}) , $$
+
+    - *survival*, 
+    - *fecundity*, and/or 
+    - *establishment* 
+
+    decrease with $D$.
 
 :::
 ::::::: {.column width="50%"}
@@ -234,35 +261,15 @@ $$
 :::::::
 
 
-##  
-
-::: {.columns}
-::::::: {.column width="50%"}
-
-Given a *interaction kernel*, e.g.
-$$
-    \rho(r) = \frac{1}{2 \pi \sigma^2} e^{- r^2 / 2 \sigma^2} :
-$$
-
-3. **Population regulation:**
-    with local density
-    $$ D = \sum_j \rho(r_j) , $$
-    *survival*, *fecundity*, and/or *establishment* decrease with $D$.
-
-:::
-::::::: {.column width="50%"}
-
-![](figs/koopas_death.png){width=100%}
-
-:::
-:::::::
-
-
 ## Computation
 
 To do this, we need to know
 $$ \rho(\|x_i - x_j\|) $$
-for each pair of individuals.
+for each pair $(i,j)$ of individuals.
+
+. . .
+
+This is...
 
 . . .
 
@@ -272,7 +279,6 @@ for each pair of individuals.
 
 . . .
 
-This is...
 $$ O(N^2) $$
 
 
@@ -284,15 +290,16 @@ for each pair of **nearby** individuals.
 
 . . .
 
-... say, for all pairs with $\|x_i - x_j\| \le R$.
+... say, for all pairs with $\|x_i - x_j\| \le 3 \sigma$.
 
 . . .
 
 A $k$-d tree
 
-: allows finding all points within distance $R$ in $\log(N)$-time.
+: allows finding all points within distance $3\sigma$ in $\log(N)$-time.
 
-Computation time scales with $N M \log(N)$, where $M$ is the number of neighbors within distance $R$.
+Computation time scales with $N M \log(N)$, 
+where $M$ is the number of neighbors within distance $3\sigma$.
 
 
 ## Can I do this yet?
@@ -365,8 +372,8 @@ Andy Kern
 > 4. Poisson(1/4) offspring each time step
 > 5. ... which disperse a Normal$(0, \sigma_d)$ distance.
 > 6. Local density for $i$ computed as:
->     $$ D_i = \sum_{j \neq i} e^{-d_{ij}^2 /2 \sigma_i^2} / 2 \pi \sigma_i^2, $$
-> 7. Probability of survival:
+>     $$ D_i = \frac{1}{2 \pi \sigma_i^2} \sum_{j \neq i} e^{-d_{ij}^2 /2 \sigma_i^2} , $$
+> 7. Probability of survival: with $K=5$,
 >     $$ \min(0.95, 1/(1 + D_i / 5 K) . $$
 > 8. $10^8$ bp with recomb rate $10^{-9}$; neutral mutations on the tree sequence after.
 
@@ -378,7 +385,22 @@ Andy Kern
 </video>
 </center>
 
-## $\sigma_d = 0.15, $\sigma_i = 0.5$
+## $\sigma_d = \sigma_i = 2$
+
+::: {.columns}
+::::::: {.column width="50%"}
+
+![](figs/flat.500.anim.last.png){width=600}
+
+:::
+::::::: {.column width="50%"}
+
+![](figs/waves.100000.ibd.png)
+
+:::
+:::::::
+
+## $\sigma_d = 0.15$, $\sigma_i = 0.5$
 
 <center>
 <video width="600" height="600" controls>
@@ -386,13 +408,45 @@ Andy Kern
 </video>
 </center>
 
-## $\sigma_d = 0.25, $\sigma_i = 0.2$
+## $\sigma_d = 0.15$, $\sigma_i = 0.5$
+
+::: {.columns}
+::::::: {.column width="50%"}
+
+![](figs/metapops.500.anim.last.png){width=600}
+
+:::
+::::::: {.column width="50%"}
+
+![](figs/metapops.100000.ibd.png)
+
+:::
+:::::::
+
+
+## $\sigma_d = 0.25$, $\sigma_i = 0.2$
 
 <center>
 <video width="600" height="600" controls>
   <source src="figs/patchy.500.anim.mp4" type="video/mp4">
 </video>
 </center>
+
+
+## $\sigma_d = 0.25$, $\sigma_i = 0.2$
+
+::: {.columns}
+::::::: {.column width="50%"}
+
+![](figs/patchy.500.anim.last.png){width=600}
+
+:::
+::::::: {.column width="50%"}
+
+![](figs/patchy.100000.ibd.png)
+
+:::
+:::::::
 
 
 
@@ -404,24 +458,25 @@ Andy Kern
 
 - If well-mixed, mean density is $K=5$ individuals per unit square.
 
-- Run times: XXX for XX diploids with $10^8$ bp,
-    recombination rate $10^{-9}$, for 100K time steps.
+- Run times: $\approx$ 1h for 1000 diploids with $10^8$ bp at $\sigma=2$,
+    recombination rate $10^{-9}$, for 200K time steps.
 
-## 
+## Approach to equilibrium
 
 ![](figs/10kouts_coalescence_by_generation.png)
 
-##
+## Popgen stats
 
 ![](figs/sumstat_by_dispersal_spat_v_rm.png)
 
-##
 
-![](figs/sfs_spatial_continuous_bins.png)
+## The site frequency spectrum
 
-##
+![](figs/sfs_spatial_v_rm_curves.png)
 
-IBD plots
+## The site frequency spectrum
+
+![](figs/sfs_spatial_v_rm_diffs.png)
 
 
 # Wrap-up
@@ -439,6 +494,10 @@ IBD plots
 > 5. But!!  We can now simulate it!
 > 
 > 6. Another complication: changes with time.
+
+##
+
+Thank you!!
 
 ## References
 

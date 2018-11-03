@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Peter Ralph">
+  <title>Space is the Place</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <style type="text/css">
+  
+  .reveal { font-size: 30px; }
+  
+  .reveal h1 { font-size: 1.5em; } 
+  
+  .reveal h2 { font-size: 1.2em; } 
+  
+  .reveal .slides { text-align: left; }
+  
+  .reveal .slides figure { text-align: center; }
+  
+  .centered p { text-align: center; }
+  
+  .reveal figcaption { display: none; }
+  
+  .reveal img { border: none; }
+  
+  .reveal section img { border: none; }
+  
+  .MathJax_Display { margin: 0; }
+  
+  </style>
+  \[
+  %%
+  % Add your macros here; they'll be included in pdf and html output.
+  %%
+  
+  \newcommand{\R}{\mathbb{R}}    % reals
+  \newcommand{\E}{\mathbb{E}}    % expectation
+  \renewcommand{\P}{\mathbb{P}}  % probability
+  \DeclareMathOperator{\logit}{logit}
+  \DeclareMathOperator{\logistic}{logistic}
+  \DeclareMathOperator{\sd}{sd}
+  \DeclareMathOperator{\var}{var}
+  \DeclareMathOperator{\cov}{cov}
+  \DeclareMathOperator{\Normal}{Normal}
+  \DeclareMathOperator{\Poisson}{Poisson}
+  \DeclareMathOperator{\Beta}{Beta}
+  \DeclareMathOperator{\Binom}{Binomial}
+  \DeclareMathOperator{\Gam}{Gamma}
+  \DeclareMathOperator{\Exp}{Exponential}
+  \DeclareMathOperator{\Cauchy}{Cauchy}
+  \DeclareMathOperator{\Unif}{Unif}
+  \DeclareMathOperator{\Dirichlet}{Dirichlet}
+  \DeclareMathOperator{\Wishart}{Wishart}
+  
+  \newcommand{\given}{\;\vert\;}
+  \]
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Space is the Place</h1>
+  <p class="author">Peter Ralph</p>
+  <p class="date">PopSim // 4 November 2018 // CSHL</p>
+</section>
+
+<section><section id="geography" class="title-slide slide level1"><h1>Geography</h1></section><section id="waldo-toblers-first-law" class="slide level2">
+<h2>Waldo Tobler’s First Law</h2>
+<blockquote>
+<p>Everything is related to everything else, but near things are more related than distant things.</p>
+</blockquote>
+</section><section id="section" class="slide level2">
+<h2></h2>
+<p><span class="math display">\[ \text{Wright-Fisher} + \text{geography} \]</span></p>
+<div class="fragment">
+<p><span class="math display">\[ \qquad {} = \text{a pain in the torus} \]</span></p>
+</div>
+<div class="fragment">
+<p><em>Felensestein, 1975</em></p>
+</div>
+</section><section id="the-pain" class="slide level2">
+<h2>The pain</h2>
+<center>
+<video width="600" height="600" controls>
+<source src="figs/pain.500.anim.mp4" type="video/mp4">
+</video>
+</center>
+</section><section id="a-related-pain" class="slide level2">
+<h2>A related pain</h2>
+<p><strong>Coalescent theory</strong> requires <em>random mating</em> in large populations, because:</p>
+<ol type="1">
+<li class="fragment">Lineages must move <em>independently</em> until the coalesce, and</li>
+<li class="fragment">if we know one offspring came from a certain location,</li>
+<li class="fragment">that location may be more likely to be the source of others.</li>
+</ol>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:25%;">
+<p><img data-src="figs/finger_right.png" style="width:90.0%" /></p>
+</div><div class="column" style="width:75%;">
+<p>We need <strong>forward simulation</strong> for realistic geography.</p>
+</div>
+</div>
+</div>
+</section><section id="the-promise" class="slide level2">
+<h2>The promise</h2>
+<p>Geography could add a <em>lot</em> of information.</p>
+<div class="fragment">
+<p>With <span class="math inline">\(n\)</span> samples and no geography, there are <span class="math inline">\(n\)</span> informative entries in the SFS.</p>
+</div>
+<div class="fragment">
+<p>With georeferenced data, each of the <span class="math inline">\(n(n-1)/2\)</span> different pairwise divergences provide different information.</p>
+</div>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-191_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-229_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-240_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-253_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-273_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-27_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-283_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-285_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-35_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-57_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-71_shaded.png" /></p>
+</section><section class="slide level2">
+
+<p><img data-src="figs/torts/pwp_etort-78_shaded.png" /></p>
+</section></section>
+<section><section id="modeling" class="title-slide slide level1"><h1>Modeling</h1></section><section id="section-1" class="slide level2">
+<h2></h2>
+<center>
+<p>The earth is not flat.</p>
+</center>
+<div class="fragment">
+<center>
+<p>barriers, currents, microclimates …</p>
+</center>
+</div>
+</section><section id="section-2" class="slide level2">
+<h2></h2>
+<center>
+<p>Population regulation is <strong>local</strong>.</p>
+</center>
+<div class="fragment">
+<center>
+<p>That means the Wright-Fisher model is <em>right out</em>.</p>
+</center>
+</div>
+</section><section id="interactions" class="slide level2">
+<h2>Interactions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Based on <em>interaction kernels</em>, e.g. <span class="math display">\[
+    \rho(r) = \frac{1}{2 \pi \sigma^2} e^{- r^2 / 2 \sigma^2}
+\]</span></p>
+<p>applied to the distance to the other individual.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/koopas.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section><section id="interactions-1" class="slide level2">
+<h2>Interactions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Based on <em>interaction kernels</em>, e.g. <span class="math display">\[
+    \rho(r) = \frac{1}{2 \pi \sigma^2} e^{- r^2 / 2 \sigma^2}
+\]</span></p>
+<p>applied to the distance to the other individual.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/koopa_interactions.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section><section id="section-3" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol type="1">
+<li><p><strong>Mate choice:</strong></p>
+<p>individual <span class="math inline">\(i\)</span> chooses partner <span class="math inline">\(j\)</span> at distance <span class="math inline">\(d_{ij}\)</span> with probability proportional to <span class="math inline">\(\rho(d_{ij})\)</span>.</p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/koopas_mates.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section><section id="section-4" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol start="2" type="1">
+<li><p><strong>Dispersal:</strong></p>
+<p>offspring live near their parents.</p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/koopas_dispersal.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section><section id="section-5" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ol start="3" type="1">
+<li><p><strong>Population regulation:</strong></p>
+<p>with local density <span class="math display">\[ D = \sum_j \rho(d_{ij}) , \]</span></p>
+<ul>
+<li><em>survival</em>,</li>
+<li><em>fecundity</em>, and/or</li>
+<li><em>establishment</em></li>
+</ul>
+<p>decrease with <span class="math inline">\(D\)</span>.</p></li>
+</ol>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/koopas_density.png" style="width:100.0%" /></p>
+</div>
+</div>
+</section><section id="computation" class="slide level2">
+<h2>Computation</h2>
+<p>To do this, we need to know <span class="math display">\[ \rho(\|x_i - x_j\|) \]</span> for each pair <span class="math inline">\((i,j)\)</span> of individuals.</p>
+<div class="fragment">
+<p>This is…</p>
+</div>
+<div class="fragment">
+<center>
+<em>(cue dramatic music)</em>
+</center>
+</div>
+<div class="fragment">
+<p><span class="math display">\[ O(N^2) \]</span></p>
+</div>
+</section><section id="computation-1" class="slide level2">
+<h2>Computation</h2>
+<p>To do this, we need to know <span class="math display">\[ \rho(\|x_i - x_j\|) \]</span> for each pair of <strong>nearby</strong> individuals.</p>
+<div class="fragment">
+<p>… say, for all pairs with <span class="math inline">\(\|x_i - x_j\| \le 3 \sigma\)</span>.</p>
+</div>
+<div class="fragment">
+<dl>
+<dt>A <span class="math inline">\(k\)</span>-d tree</dt>
+<dd><p>allows finding all points within distance <span class="math inline">\(3\sigma\)</span> in <span class="math inline">\(\log(N)\)</span>-time.</p>
+</dd>
+</dl>
+<p>Computation time scales with <span class="math inline">\(N M \log(N)\)</span>, where <span class="math inline">\(M\)</span> is the number of neighbors within distance <span class="math inline">\(3\sigma\)</span>.</p>
+</div>
+</section><section id="can-i-do-this-yet" class="slide level2">
+<h2>Can I do this yet?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Yes!!</strong></p>
+<p>In SLiM v3.1:</p>
+<ul>
+<li>nonWF modes</li>
+<li>spatial interactions</li>
+<li>geographic maps</li>
+<li>tree sequence recording</li>
+</ul>
+<p>Next: heterogeneous dispersal?</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/slim_logo.png" /></p>
+<p>Haller &amp; Messer 2018: SLiM v3.1</p>
+<p>Haller, Galloway, kelleher, Messer &amp; Ralph 2018 bioRxiv:407783</p>
+</div>
+</div>
+</section></section>
+<section><section id="but-does-it-matter" class="title-slide slide level1"><h1>But does it matter?</h1></section><section id="section-6" class="slide level2">
+<h2></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<center>
+<p><img data-src="figs/cjb.jpg" style="width:80.0%" /></p>
+<p>CJ Battey</p>
+</center>
+</div><div class="column" style="width:50%;">
+<center>
+<p><img data-src="figs/kern.jpg" style="width:80.0%" /></p>
+<p>Andy Kern</p>
+</center>
+</div>
+</div>
+</section><section id="simulations" class="slide level2">
+<h2>Simulations</h2>
+<ol type="1">
+<li class="fragment">Flat, square habitat.</li>
+<li class="fragment">Neutral.</li>
+<li class="fragment">Mate choice: proportional to <span class="math inline">\(e^{-d_{ij}^2 /2 \sigma_m^2}\)</span>.</li>
+<li class="fragment">Poisson(1/4) offspring each time step</li>
+<li class="fragment">… which disperse a Normal<span class="math inline">\((0, \sigma_d)\)</span> distance.</li>
+<li class="fragment">Local density for <span class="math inline">\(i\)</span> computed as: <span class="math display">\[ D_i = \frac{1}{2 \pi \sigma_i^2} \sum_{j \neq i} e^{-d_{ij}^2 /2 \sigma_i^2} , \]</span></li>
+<li class="fragment">Probability of survival: with <span class="math inline">\(K=5\)</span>, <span class="math display">\[ \min(0.95, 1/(1 + D_i / 5 K) . \]</span></li>
+<li class="fragment"><span class="math inline">\(10^8\)</span> bp with recomb rate <span class="math inline">\(10^{-9}\)</span>; neutral mutations on the tree sequence after.</li>
+</ol>
+</section><section id="sigma_d-sigma_i-2" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = \sigma_i = 2\)</span></h2>
+<center>
+<video width="600" height="600" controls>
+<source src="figs/flat.500.anim.mp4" type="video/mp4">
+</video>
+</center>
+</section><section id="sigma_d-sigma_i-2-1" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = \sigma_i = 2\)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="figs/flat.500.anim.last.png" width="600" /></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/waves.100000.ibd.png" /></p>
+</div>
+</div>
+</section><section id="sigma_d-0.15-sigma_i-0.5" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.15\)</span>, <span class="math inline">\(\sigma_i = 0.5\)</span></h2>
+<center>
+<video width="600" height="600" controls>
+<source src="figs/metapops.500.anim.mp4" type="video/mp4">
+</video>
+</center>
+</section><section id="sigma_d-0.15-sigma_i-0.5-1" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.15\)</span>, <span class="math inline">\(\sigma_i = 0.5\)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="figs/metapops.500.anim.last.png" width="600" /></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/metapops.100000.ibd.png" /></p>
+</div>
+</div>
+</section><section id="sigma_d-0.25-sigma_i-0.2" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.25\)</span>, <span class="math inline">\(\sigma_i = 0.2\)</span></h2>
+<center>
+<video width="600" height="600" controls>
+<source src="figs/patchy.500.anim.mp4" type="video/mp4">
+</video>
+</center>
+</section><section id="sigma_d-0.25-sigma_i-0.2-1" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.25\)</span>, <span class="math inline">\(\sigma_i = 0.2\)</span></h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><img data-src="figs/patchy.500.anim.last.png" width="600" /></p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figs/patchy.100000.ibd.png" /></p>
+</div>
+</div>
+</section><section id="nice-pictures-but-does-it-actually-matter" class="slide level2">
+<h2>Nice pictures, but Does it <em>actually</em> matter?</h2>
+<ul>
+<li><p>We varied <em>one</em> parameter, <span class="math inline">\(\sigma_d = \sigma_i = \sigma_m\)</span>.</p></li>
+<li><p>Comparison: nonspatial mate choice.</p></li>
+<li><p>If well-mixed, mean density is <span class="math inline">\(K=5\)</span> individuals per unit square.</p></li>
+<li><p>Run times: <span class="math inline">\(\approx\)</span> 1h for 1000 diploids with <span class="math inline">\(10^8\)</span> bp at <span class="math inline">\(\sigma=2\)</span>, recombination rate <span class="math inline">\(10^{-9}\)</span>, for 200K time steps.</p></li>
+</ul>
+</section><section id="approach-to-equilibrium" class="slide level2">
+<h2>Approach to equilibrium</h2>
+<p><img data-src="figs/10kouts_coalescence_by_generation.png" /></p>
+</section><section id="popgen-stats" class="slide level2">
+<h2>Popgen stats</h2>
+<p><img data-src="figs/sumstat_by_dispersal_spat_v_rm.png" /></p>
+</section><section id="the-site-frequency-spectrum" class="slide level2">
+<h2>The site frequency spectrum</h2>
+<p><img data-src="figs/sfs_spatial_v_rm_curves.png" /></p>
+</section><section id="the-site-frequency-spectrum-1" class="slide level2">
+<h2>The site frequency spectrum</h2>
+<p><img data-src="figs/sfs_spatial_v_rm_diffs.png" /></p>
+</section></section>
+<section><section id="wrap-up" class="title-slide slide level1"><h1>Wrap-up</h1></section><section id="section-7" class="slide level2">
+<h2></h2>
+<ol type="1">
+<li class="fragment"><p>Geography is interesting! We want to know about it!</p></li>
+<li class="fragment"><p>Also, geographic structure affects our data, maybe strongly.</p></li>
+<li class="fragment"><p>This is good! (a source of information)</p></li>
+<li class="fragment"><p>And also bad. (inference is more complicated)</p></li>
+<li class="fragment"><p>But!! We can now simulate it!</p></li>
+<li class="fragment"><p>Another complication: changes with time.</p></li>
+</ol>
+</section><section id="references" class="slide level2">
+<h2>References</h2>
+<ul>
+<li>Felsenstein, 1975,</li>
+<li>Barton, Depaulis and Etheridge 2002, TPB</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        math: {
+          mathjax: '/usr/share/javascript/mathjax/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/math/math.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
