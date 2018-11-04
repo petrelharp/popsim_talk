@@ -302,7 +302,7 @@ Computation time scales with $N M \log(N)$,
 where $M$ is the number of neighbors within distance $3\sigma$.
 
 
-## Can I do this yet?
+## Can we do all this yet?
 
 ::: {.columns}
 ::::::: {.column width="50%"}
@@ -313,7 +313,7 @@ where $M$ is the number of neighbors within distance $3\sigma$.
 
 In SLiM v3.1:
 
-- nonWF modes
+- nonWF models
 - spatial interactions
 - geographic maps
 - tree sequence recording
@@ -369,7 +369,7 @@ Andy Kern
 > 1. Flat, square habitat.
 > 2. Neutral.
 > 3. Mate choice: proportional to $e^{-d_{ij}^2 /2 \sigma_m^2}$.
-> 4. Poisson(1/4) offspring each time step
+> 4. Poisson(1/4) offspring each time step.
 > 5. ... which disperse a Normal$(0, \sigma_d)$ distance.
 > 6. Local density for $i$ computed as:
 >     $$ D_i = \frac{1}{2 \pi \sigma_i^2} \sum_{j \neq i} e^{-d_{ij}^2 /2 \sigma_i^2} , $$
@@ -377,7 +377,7 @@ Andy Kern
 >     $$ \min(0.95, 1/(1 + D_i / 5 K) . $$
 > 8. $10^8$ bp with recomb rate $10^{-9}$; neutral mutations on the tree sequence after.
 
-## $\sigma_d = \sigma_i = 2$
+## $\sigma_d = \sigma_i = \sigma_m = 2$
 
 <center>
 <video width="600" height="600" controls>
@@ -385,7 +385,7 @@ Andy Kern
 </video>
 </center>
 
-## $\sigma_d = \sigma_i = 2$
+## $\sigma_d = \sigma_i = \sigma_m = 2$
 
 ::: {.columns}
 ::::::: {.column width="50%"}
@@ -400,7 +400,7 @@ Andy Kern
 :::
 :::::::
 
-## $\sigma_d = 0.15$, $\sigma_i = 0.5$
+## $\sigma_d = 0.15$, $\sigma_i = \sigma_m = 0.5$
 
 <center>
 <video width="600" height="600" controls>
@@ -408,7 +408,7 @@ Andy Kern
 </video>
 </center>
 
-## $\sigma_d = 0.15$, $\sigma_i = 0.5$
+## $\sigma_d = 0.15$, $\sigma_i = \sigma_m = 0.5$
 
 ::: {.columns}
 ::::::: {.column width="50%"}
@@ -424,7 +424,7 @@ Andy Kern
 :::::::
 
 
-## $\sigma_d = 0.25$, $\sigma_i = 0.2$
+## $\sigma_d = 0.25$, $\sigma_i = \sigma_m = 0.2$
 
 <center>
 <video width="600" height="600" controls>
@@ -433,7 +433,7 @@ Andy Kern
 </center>
 
 
-## $\sigma_d = 0.25$, $\sigma_i = 0.2$
+## $\sigma_d = 0.25$, $\sigma_i = \sigma_m = 0.2$
 
 ::: {.columns}
 ::::::: {.column width="50%"}

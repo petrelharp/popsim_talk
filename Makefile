@@ -10,7 +10,7 @@ figs :
 	$(MAKE) -C figs
 
 # change this to the location of your local MathJax.js library
-LOCAL_MATHJAX = /usr/share/javascript/mathjax/MathJax.js
+LOCAL_MATHJAX = /usr/share/javascript/mathjax/MathJax.jsXXX
 ifeq ($(wildcard $(LOCAL_MATHJAX)),)
 	MATHJAX = https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js
 else
@@ -18,7 +18,7 @@ else
 endif
 
 # may want to add "--self-contained" to the following
-PANDOC_OPTS = --mathjax=$(MATHJAX)?config=TeX-AMS-MML_HTMLorMML --standalone
+PANDOC_OPTS = --mathjax=$(MATHJAX)?config=TeX-AMS-MML_HTMLorMML --standalone # --self-contained
 # optionally add in a latex file with macros
 LATEX_MACROS = macros.tex
 ifeq ($(wildcard $(LATEX_MACROS)),)

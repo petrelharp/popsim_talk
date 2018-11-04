@@ -51,29 +51,12 @@
   
   </style>
   \[
-  %%
-  % Add your macros here; they'll be included in pdf and html output.
-  %%
-  
   \newcommand{\R}{\mathbb{R}}    % reals
   \newcommand{\E}{\mathbb{E}}    % expectation
   \renewcommand{\P}{\mathbb{P}}  % probability
-  \DeclareMathOperator{\logit}{logit}
-  \DeclareMathOperator{\logistic}{logistic}
   \DeclareMathOperator{\sd}{sd}
   \DeclareMathOperator{\var}{var}
   \DeclareMathOperator{\cov}{cov}
-  \DeclareMathOperator{\Normal}{Normal}
-  \DeclareMathOperator{\Poisson}{Poisson}
-  \DeclareMathOperator{\Beta}{Beta}
-  \DeclareMathOperator{\Binom}{Binomial}
-  \DeclareMathOperator{\Gam}{Gamma}
-  \DeclareMathOperator{\Exp}{Exponential}
-  \DeclareMathOperator{\Cauchy}{Cauchy}
-  \DeclareMathOperator{\Unif}{Unif}
-  \DeclareMathOperator{\Dirichlet}{Dirichlet}
-  \DeclareMathOperator{\Wishart}{Wishart}
-  
   \newcommand{\given}{\;\vert\;}
   \]
 </head>
@@ -285,14 +268,14 @@
 </dl>
 <p>Computation time scales with <span class="math inline">\(N M \log(N)\)</span>, where <span class="math inline">\(M\)</span> is the number of neighbors within distance <span class="math inline">\(3\sigma\)</span>.</p>
 </div>
-</section><section id="can-i-do-this-yet" class="slide level2">
-<h2>Can I do this yet?</h2>
+</section><section id="can-we-do-all-this-yet" class="slide level2">
+<h2>Can we do all this yet?</h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><strong>Yes!!</strong></p>
 <p>In SLiM v3.1:</p>
 <ul>
-<li>nonWF modes</li>
+<li>nonWF models</li>
 <li>spatial interactions</li>
 <li>geographic maps</li>
 <li>tree sequence recording</li>
@@ -326,21 +309,21 @@
 <li class="fragment">Flat, square habitat.</li>
 <li class="fragment">Neutral.</li>
 <li class="fragment">Mate choice: proportional to <span class="math inline">\(e^{-d_{ij}^2 /2 \sigma_m^2}\)</span>.</li>
-<li class="fragment">Poisson(1/4) offspring each time step</li>
+<li class="fragment">Poisson(1/4) offspring each time step.</li>
 <li class="fragment">… which disperse a Normal<span class="math inline">\((0, \sigma_d)\)</span> distance.</li>
 <li class="fragment">Local density for <span class="math inline">\(i\)</span> computed as: <span class="math display">\[ D_i = \frac{1}{2 \pi \sigma_i^2} \sum_{j \neq i} e^{-d_{ij}^2 /2 \sigma_i^2} , \]</span></li>
 <li class="fragment">Probability of survival: with <span class="math inline">\(K=5\)</span>, <span class="math display">\[ \min(0.95, 1/(1 + D_i / 5 K) . \]</span></li>
 <li class="fragment"><span class="math inline">\(10^8\)</span> bp with recomb rate <span class="math inline">\(10^{-9}\)</span>; neutral mutations on the tree sequence after.</li>
 </ol>
-</section><section id="sigma_d-sigma_i-2" class="slide level2">
-<h2><span class="math inline">\(\sigma_d = \sigma_i = 2\)</span></h2>
+</section><section id="sigma_d-sigma_i-sigma_m-2" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = \sigma_i = \sigma_m = 2\)</span></h2>
 <center>
 <video width="600" height="600" controls>
 <source src="figs/flat.500.anim.mp4" type="video/mp4">
 </video>
 </center>
-</section><section id="sigma_d-sigma_i-2-1" class="slide level2">
-<h2><span class="math inline">\(\sigma_d = \sigma_i = 2\)</span></h2>
+</section><section id="sigma_d-sigma_i-sigma_m-2-1" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = \sigma_i = \sigma_m = 2\)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="figs/flat.500.anim.last.png" width="600" /></p>
@@ -348,15 +331,15 @@
 <p><img data-src="figs/waves.100000.ibd.png" /></p>
 </div>
 </div>
-</section><section id="sigma_d-0.15-sigma_i-0.5" class="slide level2">
-<h2><span class="math inline">\(\sigma_d = 0.15\)</span>, <span class="math inline">\(\sigma_i = 0.5\)</span></h2>
+</section><section id="sigma_d-0.15-sigma_i-sigma_m-0.5" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.15\)</span>, <span class="math inline">\(\sigma_i = \sigma_m = 0.5\)</span></h2>
 <center>
 <video width="600" height="600" controls>
 <source src="figs/metapops.500.anim.mp4" type="video/mp4">
 </video>
 </center>
-</section><section id="sigma_d-0.15-sigma_i-0.5-1" class="slide level2">
-<h2><span class="math inline">\(\sigma_d = 0.15\)</span>, <span class="math inline">\(\sigma_i = 0.5\)</span></h2>
+</section><section id="sigma_d-0.15-sigma_i-sigma_m-0.5-1" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.15\)</span>, <span class="math inline">\(\sigma_i = \sigma_m = 0.5\)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="figs/metapops.500.anim.last.png" width="600" /></p>
@@ -364,15 +347,15 @@
 <p><img data-src="figs/metapops.100000.ibd.png" /></p>
 </div>
 </div>
-</section><section id="sigma_d-0.25-sigma_i-0.2" class="slide level2">
-<h2><span class="math inline">\(\sigma_d = 0.25\)</span>, <span class="math inline">\(\sigma_i = 0.2\)</span></h2>
+</section><section id="sigma_d-0.25-sigma_i-sigma_m-0.2" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.25\)</span>, <span class="math inline">\(\sigma_i = \sigma_m = 0.2\)</span></h2>
 <center>
 <video width="600" height="600" controls>
 <source src="figs/patchy.500.anim.mp4" type="video/mp4">
 </video>
 </center>
-</section><section id="sigma_d-0.25-sigma_i-0.2-1" class="slide level2">
-<h2><span class="math inline">\(\sigma_d = 0.25\)</span>, <span class="math inline">\(\sigma_i = 0.2\)</span></h2>
+</section><section id="sigma_d-0.25-sigma_i-sigma_m-0.2-1" class="slide level2">
+<h2><span class="math inline">\(\sigma_d = 0.25\)</span>, <span class="math inline">\(\sigma_i = \sigma_m = 0.2\)</span></h2>
 <div class="columns">
 <div class="column" style="width:50%;">
 <p><img data-src="figs/patchy.500.anim.last.png" width="600" /></p>
@@ -411,6 +394,9 @@
 <li class="fragment"><p>But!! We can now simulate it!</p></li>
 <li class="fragment"><p>Another complication: changes with time.</p></li>
 </ol>
+</section><section id="section-8" class="slide level2">
+<h2></h2>
+<p>Thank you!!</p>
 </section><section id="references" class="slide level2">
 <h2>References</h2>
 <ul>
@@ -436,7 +422,7 @@
         // Transition style
         transition: 'none', // none/fade/slide/convex/concave/zoom
         math: {
-          mathjax: '/usr/share/javascript/mathjax/MathJax.js',
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
