@@ -10,7 +10,7 @@ figs :
 	$(MAKE) -C figs
 
 # change this to the location of your local MathJax.js library
-LOCAL_MATHJAX = /usr/share/javascript/mathjax/MathJax.jsXXX
+LOCAL_MATHJAX = /usr/share/javascript/mathjax/MathJax.js
 ifeq ($(wildcard $(LOCAL_MATHJAX)),)
 	MATHJAX = https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js
 else

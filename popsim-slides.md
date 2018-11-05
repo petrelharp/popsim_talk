@@ -244,7 +244,7 @@ applied to the distance to the other individual.
 3. **Population regulation:**
 
     with local density
-    $$ D = \sum_j \rho(d_{ij}) , $$
+    $$ D_i = \sum_j \rho(d_{ij}) , $$
 
     - *survival*, 
     - *fecundity*, and/or 
@@ -318,6 +318,7 @@ In SLiM v3.1:
 - geographic maps
 - tree sequence recording
 
+See Philipp's poster!
 
 Next: heterogeneous dispersal?
 
@@ -498,8 +499,3 @@ Andy Kern
 ##
 
 Thank you!!
-
-## References
-
-- Felsenstein, 1975, 
-- Barton, Depaulis and Etheridge 2002, TPB
